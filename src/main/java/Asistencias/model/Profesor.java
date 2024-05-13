@@ -1,17 +1,17 @@
 package Asistencias.model;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "estudiantes")
-public class Estudiante {
+@Table(name = "profesores")
+public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_estudiante;
+    private Long id_profesor;
 
     private String nombre;
     private String apellido;
@@ -20,16 +20,16 @@ public class Estudiante {
     private String avatar;
 
     // Constructor sin argumentos
-    public Estudiante() {
+    public Profesor() {
     }
 
     // Getters y setters
-    public Long getId_estudiante() {
-        return id_estudiante;
+    public Long getId_profesor() {
+        return id_profesor;
     }
 
-    public void setId_estudiante(Long id_estudiante) {
-        this.id_estudiante = id_estudiante;
+    public void setId_profesor(Long id_profesor) {
+        this.id_profesor = id_profesor;
     }
 
     public String getNombre() {
