@@ -4,11 +4,13 @@ import Asistencias.repository.MateriaEstudianteRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/añadirmateriaestudiante")
+@RequestMapping(path = "/api/materiaestudiante")
 @CrossOrigin(origins = "http://localhost:4200") 
 public class MateriaEstudianteController {
 
@@ -21,9 +23,22 @@ public class MateriaEstudianteController {
     }
 
     @PostMapping
-    public void createMateriaEstudiante(@RequestBody MateriaEstudiante materiaestudiante) {
-        materiaestudianteRepository.save(materiaestudiante);
+public ResponseEntity<?> createMateriaEstudiante(@RequestBody MateriaEstudiante materiaestudiante) {
+    List<MateriaEstudiante> existingEntries = materiaestudianteRepository.findByIdEstudianteAndIdMateriaAndHoraAndDias(
+        materiaestudiante.getId_estudiante(),
+        materiaestudiante.getId_materia(),
+        materiaestudiante.getHora(),
+        materiaestudiante.getDias()
+    );
+
+    if (!existingEntries.isEmpty()) {
+        return new ResponseEntity<>("Ya existe un registro con los mismos datos.", HttpStatus.CONFLICT);
     }
+
+    materiaestudianteRepository.save(materiaestudiante);
+    return new ResponseEntity<>(materiaestudiante, HttpStatus.CREATED);
+}
+
 
     @DeleteMapping("/{id}")
     public void deleteMateriaEstudiante(@PathVariable Long id) {

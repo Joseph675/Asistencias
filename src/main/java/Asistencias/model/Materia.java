@@ -4,6 +4,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "materias")
@@ -13,29 +14,27 @@ public class Materia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_materia;
 
-    private String nombre_materia;
-    
+    @Column(name = "nombre_materia")
+    private String nombreMateria;
 
     // Constructor sin argumentos
     public Materia() {
     }
 
     // Getters y setters
-    public Long getid_materia() {
+    public Long getIdMateria() {
         return id_materia;
     }
 
-    public void setid_materia(Long id_materia) {
+    public void setIdMateria(Long id_materia) {
         this.id_materia = id_materia;
     }
 
-    public String getNombre_materia() {
-        return nombre_materia;
+    public String getNombreMateria() {
+        return nombreMateria;
     }
 
-    public void setNombre_materia(String nombre_materia) {
-        this.nombre_materia = nombre_materia;
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
     }
-
-    
 }

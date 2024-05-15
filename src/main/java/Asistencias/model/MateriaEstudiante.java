@@ -1,20 +1,21 @@
 package Asistencias.model;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "estudiantes_materias")
-@IdClass(MateriaEstudianteId.class)
 public class MateriaEstudiante {
 
     @Id
-    private int id_estudiante;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
+    private int id_estudiante; // Cambia esto a un int
+
     private int id_materia;
-
     private String hora;
     private String dias;
 
@@ -23,6 +24,14 @@ public class MateriaEstudiante {
     }
 
     // Getters y setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public int getId_estudiante() {
         return id_estudiante;
     }
