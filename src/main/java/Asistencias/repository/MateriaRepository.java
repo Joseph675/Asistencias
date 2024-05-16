@@ -5,5 +5,6 @@ import Asistencias.model.Materia;
 
 public interface MateriaRepository extends JpaRepository<Materia, Long> {
     Materia findByNombreMateria(String nombreMateria);
+    
 }
 

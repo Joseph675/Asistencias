@@ -1,7 +1,16 @@
 package Asistencias.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +28,7 @@ import Asistencias.model.Estudiante;
 import Asistencias.repository.EstudianteRepository;
 import Asistencias.repository.MateriaEstudianteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(path = "/api/estudiantes")
@@ -34,6 +44,103 @@ public class EstudianteController {
     @GetMapping
     public List<Estudiante> getEstudiantes() {
         return estudianteRepository.findAll();
+    }
+
+    //Exportar achivo excel
+    @GetMapping("/exportExcel")
+    public ResponseEntity<?> exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=estudiantes.xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Estudiante> listEstudiantes = estudianteRepository.findAll();
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Estudiantes");
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
+        cell.setCellValue("ID Estudiante");
+        cell = row.createCell(1);
+        cell.setCellValue("Nombre");
+        cell = row.createCell(2); // Nueva celda para Apellido
+        cell.setCellValue("Apellido");
+        cell = row.createCell(3); // Nueva celda para Email
+        cell.setCellValue("Email");
+        cell = row.createCell(4); // Nueva celda para Rol
+        cell.setCellValue("Rol");
+
+        // Agrega más columnas aquí si es necesario
+        for (int i = 0; i < listEstudiantes.size(); i++) {
+            Estudiante estudiante = listEstudiantes.get(i);
+            row = sheet.createRow(i + 1);
+            cell = row.createCell(0);
+            cell.setCellValue(estudiante.getId_estudiante());
+            cell = row.createCell(1);
+            cell.setCellValue(estudiante.getNombre());
+            cell = row.createCell(2);
+            cell.setCellValue(estudiante.getApellido());
+            cell = row.createCell(3);
+            cell.setCellValue(estudiante.getEmail());
+            cell = row.createCell(4);
+            cell.setCellValue(estudiante.getrol());
+            // Agrega más celdas aquí si es necesario
+        }
+
+        workbook.write(response.getOutputStream());
+        return ResponseEntity.ok().build();
+    }
+
+    //Exportar achivo TXT
+    @GetMapping("/exportTxt")
+    public ResponseEntity<?> exportToTxt(HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=estudiantes.txt";
+        response.setHeader(headerKey, headerValue);
+
+        List<Estudiante> listEstudiantes = estudianteRepository.findAll();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ID Estudiante\tNombre\tApellido\tEmail\tRol\n");
+        for (Estudiante estudiante : listEstudiantes) {
+            sb.append(estudiante.getId_estudiante()).append("\t")
+                    .append(estudiante.getNombre()).append("\t")
+                    .append(estudiante.getApellido()).append("\t")
+                    .append(estudiante.getEmail()).append("\t")
+                    .append(estudiante.getrol()).append("\n");
+        }
+
+        response.getWriter().write(sb.toString());
+        return ResponseEntity.ok().build();
+    }
+
+//Exportar achivo word
+    @GetMapping("/exportWord")
+    public ResponseEntity<?> exportToWord(HttpServletResponse response) throws IOException {
+        response.setContentType("application/msword");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=estudiantes.docx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Estudiante> listEstudiantes = estudianteRepository.findAll();
+
+        XWPFDocument document = new XWPFDocument();
+        XWPFParagraph paragraph = document.createParagraph();
+        XWPFRun run = paragraph.createRun();
+
+        run.setText("ID Estudiante\tNombre\tApellido\tEmail\tRol\n");
+        for (Estudiante estudiante : listEstudiantes) {
+            run.addBreak();
+            run.setText(estudiante.getId_estudiante() + "\t"
+                    + estudiante.getNombre() + "\t"
+                    + estudiante.getApellido() + "\t"
+                    + estudiante.getEmail() + "\t"
+                    + estudiante.getrol());
+        }
+
+        document.write(response.getOutputStream());
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping
