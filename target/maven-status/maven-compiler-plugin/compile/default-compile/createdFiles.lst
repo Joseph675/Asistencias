@@ -1,5 +1,4 @@
 Asistencias\controller\MateriaController.class
-Asistencias\model\MateriaEstudianteId.class
 Asistencias\repository\EstudianteRepository.class
 Asistencias\model\MateriaEstudiante.class
 Asistencias\repository\MateriaEstudianteRepository.class

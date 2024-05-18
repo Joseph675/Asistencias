@@ -46,6 +46,12 @@ public class EstudianteController {
         return estudianteRepository.findAll();
     }
 
+    @GetMapping("/porEstudiante/{id_estudiante}")
+    public List<Estudiante> getMateriaEstudiantePorEstudiante(@PathVariable Long id_estudiante) {
+        return estudianteRepository.findByIdEstudiante(id_estudiante);
+    }
+    
+
     //Exportar achivo excel
     @GetMapping("/exportExcel")
     public ResponseEntity<?> exportToExcel(HttpServletResponse response) throws IOException {

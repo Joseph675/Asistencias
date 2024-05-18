@@ -57,14 +57,20 @@ public class ProfesorController {
     @PutMapping("/{id}")
     public Profesor updateProfesor(@PathVariable Long id, @RequestBody Profesor profesorDetails) {
         Profesor profesor = profesorRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Profesor no encontrado con id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Profesor no encontrado con id :" + id));
 
-            profesor.setNombre(profesorDetails.getNombre());
+        // Comprueba si el correo electrónico ya existe
+        Profesor existingProfesor = profesorRepository.findByEmail(profesorDetails.getEmail());
+        if (existingProfesor != null && !existingProfesor.getId_profesor().equals(id)) {
+            throw new IllegalArgumentException("El correo electrónico ya está en uso");
+        }
+
+        profesor.setNombre(profesorDetails.getNombre());
             profesor.setApellido(profesorDetails.getApellido());
             profesor.setEmail(profesorDetails.getEmail());
 
-        Profesor updatedProfesor = profesorRepository.save(profesor);
-        return updatedProfesor;
+            Profesor updateProfesor = profesorRepository.save(profesor);
+        return updateProfesor;
     }
 
 }
