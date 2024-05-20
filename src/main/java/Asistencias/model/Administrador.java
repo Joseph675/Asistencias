@@ -6,13 +6,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "estudiantes")
-public class Estudiante {
+@Table(name = "administradores")
+public class Administrador {
     
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_estudiante;
+    private Long id_administrador;
 
     private String nombre;
     private String apellido;
@@ -22,16 +22,16 @@ public class Estudiante {
     private String avatar;
 
     // Constructor sin argumentos
-    public Estudiante() {
+    public Administrador() {
     }
 
     // Getters y setters
-    public Long getId_estudiante() {
-        return id_estudiante;
+    public Long getId_administrador() {
+        return id_administrador;
     }
 
-    public void setId_estudiante(Long id_estudiante) {
-        this.id_estudiante = id_estudiante;
+    public void setId_administrador(Long id_administrador) {
+        this.id_administrador = id_administrador;
     }
 
     public String getNombre() {
