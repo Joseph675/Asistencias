@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Asistencias.model.Materia;
-import Asistencias.repository.MateriaRepository;
 import Asistencias.repository.MateriaEstudianteRepository;
+import Asistencias.repository.MateriaRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
@@ -35,6 +35,11 @@ public class MateriaController {
     @GetMapping
     public List<Materia> getMaterias() {
         return materiaRepository.findAll();
+    }
+
+    @GetMapping("/materia/{id_materia}")
+    public Materia getMateriaId(@PathVariable Long id_materia) {
+        return materiaRepository.findById(id_materia).orElse(null);
     }
 
     @PostMapping
@@ -55,7 +60,8 @@ public class MateriaController {
     @Transactional
     @DeleteMapping("/{id}")
     public void deleteMateria(@PathVariable Long id) {
-        // Primero, elimina las filas en estudiantes_materias que hacen referencia a la materia
+        // Primero, elimina las filas en estudiantes_materias que hacen referencia a la
+        // materia
         materiaestudianteRepository.deleteByIdMateria(id);
 
         // Luego, elimina la materia

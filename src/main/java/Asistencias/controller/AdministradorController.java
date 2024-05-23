@@ -1,7 +1,9 @@
 package Asistencias.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import Asistencias.JwtTokenProvider;
 import Asistencias.model.Administrador;
 import Asistencias.repository.AdministradorRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -36,12 +40,14 @@ public class AdministradorController {
 
     @Autowired
     private AdministradorRepository administradorRepository;
+    
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping
     public List<Administrador> getAdministrador() {
         return administradorRepository.findAll();
     }
-    
 
     //Exportar achivo excel
     @GetMapping("/exportExcel")
@@ -181,22 +187,34 @@ public class AdministradorController {
     }
 
     @PostMapping("/login")
-    public Administrador loginAdministrador(@RequestBody Administrador administradorDetails) {
-        // Buscar al estudiante en la base de datos
-        Administrador administrador = administradorRepository.findByEmail(administradorDetails.getEmail());
+    public ResponseEntity<?> login(@RequestBody Administrador loginRequest) {
+        // Buscar el administrador en la base de datos
+        Administrador administrador = administradorRepository.findByEmail(loginRequest.getEmail());
 
-        // Si el estudiante no existe, lanzar un error
-        if (administrador == null) {
-            throw new EntityNotFoundException("Administrador no encontrado con email: " + administradorDetails.getEmail());
+        // Comprobar si el administrador existe y la contraseña es correcta
+        if (administrador != null && loginRequest.getpassword().equals(administrador.getpassword())) {
+            // Inicio de sesión exitoso
+            // Generar el token JWT
+            String token = jwtTokenProvider.createToken(loginRequest.getEmail(), administrador.getrol());
+
+            // Imprimir el token en la consola
+            System.out.println("Token generado: " + token);
+
+            // Crear un mapa para la respuesta
+            Map<Object, Object> model = new HashMap<>();
+            model.put("id", administrador.getId_administrador());  // Aquí está el cambio
+            model.put("nombre", administrador.getNombre());  // Aquí está el cambio
+            model.put("email", administrador.getEmail());  // Aquí está el cambio
+            model.put("avatar", administrador.getAvatar());  // Aquí está el cambio
+            model.put("rol", administrador.getrol());  // Aquí está el cambio
+            model.put("token", token);
+
+            // Devolver el token en la respuesta
+            return ResponseEntity.ok(model);
+        } else {
+            // Inicio de sesión fallido
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Correo electrónico o contraseña incorrectos");
         }
-
-        // Si la password no coincide, lanzar un error
-        if (!administrador.getpassword().equals(administradorDetails.getpassword())) {
-            throw new IllegalArgumentException("password incorrecta");
-        }
-
-        // Si las credenciales son correctas, devolver el estudiante
-        return administrador;
     }
 
 }

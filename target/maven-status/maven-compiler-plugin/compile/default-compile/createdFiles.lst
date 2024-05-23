@@ -1,13 +1,8 @@
-Asistencias\controller\MateriaController.class
-Asistencias\repository\EstudianteRepository.class
 Asistencias\model\MateriaEstudiante.class
+Asistencias\repository\ActividadRepository.class
 Asistencias\repository\MateriaEstudianteRepository.class
-Asistencias\model\Estudiante.class
-Asistencias\model\Materia.class
-Asistencias\AsistenciasApplication.class
 Asistencias\controller\MateriaEstudianteController.class
-Asistencias\repository\MateriaRepository.class
 Asistencias\model\Profesor.class
-Asistencias\controller\ProfesorController.class
 Asistencias\repository\ProfesorRepository.class
-Asistencias\controller\EstudianteController.class
+Asistencias\model\Actividad.class
+Asistencias\controller\ActividadController.class

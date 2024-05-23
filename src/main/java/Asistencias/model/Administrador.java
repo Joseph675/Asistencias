@@ -12,6 +12,7 @@ public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id_administrador;
 
     private String nombre;
@@ -71,8 +72,6 @@ public class Administrador {
     public String getrol() {
         return rol;
     }
-
-    
 
     public String getAvatar() {
         return avatar;

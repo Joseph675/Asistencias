@@ -1,7 +1,9 @@
 package Asistencias.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import Asistencias.JwtTokenProvider;
 import Asistencias.model.Estudiante;
 import Asistencias.repository.EstudianteRepository;
 import Asistencias.repository.MateriaEstudianteRepository;
@@ -40,6 +44,9 @@ public class EstudianteController {
 
     @Autowired
     private MateriaEstudianteRepository materiaestudianteRepository;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping
     public List<Estudiante> getEstudiantes() {
@@ -193,22 +200,34 @@ public class EstudianteController {
     }
 
     @PostMapping("/login")
-    public Estudiante loginEstudiante(@RequestBody Estudiante estudianteDetails) {
-        // Buscar al estudiante en la base de datos
-        Estudiante estudiante = estudianteRepository.findByEmail(estudianteDetails.getEmail());
+    public ResponseEntity<?> login(@RequestBody Estudiante loginRequest) {
+        // Buscar el estudiante en la base de datos
+        Estudiante estudiante = estudianteRepository.findByEmail(loginRequest.getEmail());
 
-        // Si el estudiante no existe, lanzar un error
-        if (estudiante == null) {
-            throw new EntityNotFoundException("Estudiante no encontrado con email: " + estudianteDetails.getEmail());
+        // Comprobar si el estudiante existe y la contraseña es correcta
+        if (estudiante != null && loginRequest.getpassword().equals(estudiante.getpassword())) {
+            // Inicio de sesión exitoso
+            // Generar el token JWT
+            String token = jwtTokenProvider.createToken(loginRequest.getEmail(), estudiante.getrol());
+
+            // Imprimir el token en la consola
+            System.out.println("Token generado: " + token);
+
+            // Crear un mapa para la respuesta
+            Map<Object, Object> model = new HashMap<>();
+            model.put("id", estudiante.getId_estudiante());  // Aquí está el cambio
+            model.put("nombre", estudiante.getNombre());  // Aquí está el cambio
+            model.put("email", estudiante.getEmail());  // Aquí está el cambio
+            model.put("avatar", estudiante.getAvatar());  // Aquí está el cambio
+            model.put("rol", estudiante.getrol());  // Aquí está el cambio
+            model.put("token", token);
+
+            // Devolver el token en la respuesta
+            return ResponseEntity.ok(model);
+        } else {
+            // Inicio de sesión fallido
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Correo electrónico o contraseña incorrectos");
         }
-
-        // Si la password no coincide, lanzar un error
-        if (!estudiante.getpassword().equals(estudianteDetails.getpassword())) {
-            throw new IllegalArgumentException("password incorrecta");
-        }
-
-        // Si las credenciales son correctas, devolver el estudiante
-        return estudiante;
     }
 
 }

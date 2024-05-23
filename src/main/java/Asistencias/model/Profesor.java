@@ -18,6 +18,7 @@ public class Profesor {
     private String email;
     private String password;
     private String avatar;
+    private String rol;
 
     // Constructor sin argumentos
     public Profesor() {
@@ -72,5 +73,8 @@ public class Profesor {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+    public String getrol() {
+        return rol;
     }
 }

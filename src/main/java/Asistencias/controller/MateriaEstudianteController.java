@@ -37,6 +37,12 @@ public class MateriaEstudianteController {
         return materiaestudianteRepository.findByIdEstudiante(id_estudiante);
     }
 
+
+    @GetMapping("/porMateria/{id_materia}")
+    public List<MateriaEstudiante> getMateriaEstudiantePorMateria(@PathVariable Long id_materia) {
+        return materiaestudianteRepository.findByIdMateria(id_materia);
+    }
+
     @PostMapping
     public ResponseEntity<?> createMateriaEstudiante(@RequestBody MateriaEstudiante materiaestudiante) {
         List<MateriaEstudiante> existingEntries = materiaestudianteRepository.findByIdEstudianteAndIdMateriaAndHoraAndDias(

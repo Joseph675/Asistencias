@@ -10,7 +10,7 @@ import Asistencias.model.Administrador;
 
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
     Administrador findByEmail(String email);
-
+    
     @Modifying
     @Transactional
     @Query(value = "SELECT * FROM administrador WHERE id_administrador = :idAdministrador", nativeQuery = true)

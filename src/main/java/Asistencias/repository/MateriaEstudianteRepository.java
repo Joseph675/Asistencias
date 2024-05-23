@@ -27,4 +27,7 @@ public interface MateriaEstudianteRepository extends JpaRepository<MateriaEstudi
     @Query(value = "SELECT * FROM estudiantes_materias WHERE id_estudiante = :idEstudiante", nativeQuery = true)
     List<MateriaEstudiante> findByIdEstudiante(Long idEstudiante);
 
+    @Query(value = "SELECT * FROM estudiantes_materias WHERE id_materia = :idMateria", nativeQuery = true)
+    List<MateriaEstudiante> findByIdMateria(@Param("idMateria") Long id_materia);
+
 }
