@@ -1,6 +1,8 @@
 package Asistencias.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("PROFESOR")
@@ -13,8 +15,8 @@ public class Profesor extends Usuario {
     }
 
     // Constructor con parámetros
-    public Profesor(String nombre, String email, String username, String password, String avatar, String especialidad) {
-        super(nombre, email, username, password, avatar);
+    public Profesor(int idUsuUni,String nombre, String email, String username, String password, String avatar, String especialidad, String facultad) {
+        super(idUsuUni, nombre, email, username, password, avatar, facultad);
         this.especialidad = especialidad;
     }
 

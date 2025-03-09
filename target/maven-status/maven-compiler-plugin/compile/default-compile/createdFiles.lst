@@ -1,8 +1,1 @@
-Asistencias\model\MateriaEstudiante.class
-Asistencias\repository\ActividadRepository.class
-Asistencias\repository\MateriaEstudianteRepository.class
-Asistencias\controller\MateriaEstudianteController.class
 Asistencias\model\Profesor.class
-Asistencias\repository\ProfesorRepository.class
-Asistencias\model\Actividad.class
-Asistencias\controller\ActividadController.class
