@@ -3,6 +3,8 @@ package Asistencias.model;
 import jakarta.persistence.*;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @DiscriminatorValue("PROFESOR")
