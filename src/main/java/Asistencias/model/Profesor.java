@@ -1,10 +1,8 @@
 package Asistencias.model;
 
-import jakarta.persistence.*;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 @Entity
 @DiscriminatorValue("PROFESOR")
@@ -17,8 +15,8 @@ public class Profesor extends Usuario {
     }
 
     // Constructor con parámetros
-    public Profesor(int idUsuUni,String nombre, String email, String username, String password, String avatar, String especialidad, String facultad) {
-        super(idUsuUni, nombre, email, username, password, avatar, facultad);
+    public Profesor(Long idUsuario, Long idUsuUni,String nombre, String email, String username, String password, String avatar, String especialidad, String facultad) {
+        super(idUsuario,idUsuUni, nombre, email, username, password, avatar, facultad);
         this.especialidad = especialidad;
     }
 

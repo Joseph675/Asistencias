@@ -25,7 +25,7 @@ public abstract class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    private int idUsuUni;
+    private Long idUsuUni;
     private String nombre;
     private String email;
     private String username;  
@@ -33,13 +33,13 @@ public abstract class Usuario {
     private String avatar;
     private String facultad;
 
-
     // Constructor sin argumentos
     public Usuario() {
     }
 
     // Constructor con parámetros
-    public Usuario(int idUsuUni, String nombre, String email, String username, String password, String avatar,String facultad) {
+    public Usuario(Long idUsuario, Long idUsuUni, String nombre, String email, String username, String password, String avatar, String facultad) {
+        this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
         this.nombre = nombre;
         this.email = email;
@@ -58,11 +58,11 @@ public abstract class Usuario {
         this.idUsuario = idUsuario;
     }
     
-    public int getIdUsuUni() {
+    public Long getIdUsuUni() {
         return idUsuUni;
     }
 
-    public void setIdUsuUni(int idUsuUni) {
+    public void setIdUsuUni(Long idUsuUni) {
         this.idUsuUni = idUsuUni;
     }
     
@@ -108,6 +108,4 @@ public abstract class Usuario {
     public void setFacultad(String facultad) {
         this.facultad = facultad;
     }
-
-    
 }

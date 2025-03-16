@@ -1,5 +1,8 @@
 package Asistencias.controller;
 
+import Asistencias.dto.UsuarioDTO;
+import Asistencias.exception.UsuarioDuplicadoException;
+import Asistencias.factory.UsuarioFactory;
 import Asistencias.model.Usuario;
 import Asistencias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +42,28 @@ public class UsuarioController {
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
-        System.out.println("JSON recibido: " + usuario);
-        Usuario nuevoUsuario = usuarioService.guardar(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
+    public ResponseEntity<?> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        System.out.println("JSON recibido: " + usuarioDTO);
+        try {
+            Usuario usuario = UsuarioFactory.crearUsuario(usuarioDTO);
+            Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioDTO(
+                nuevoUsuario.getIdUsuUni(),
+                nuevoUsuario.getNombre(),
+                nuevoUsuario.getEmail(),
+                nuevoUsuario.getUsername(),
+                nuevoUsuario.getAvatar(),
+                nuevoUsuario.getFacultad(),
+                usuarioDTO.getCarrera(), // Devolver el campo carrera
+                usuarioDTO.getEspecialidad(), // Devolver el campo especialidad
+                usuarioDTO.getArea(), // Devolver el campo area
+                usuarioDTO.getTipoUsuario() // Devolver el tipo de usuario
+            ));
+        } catch (UsuarioDuplicadoException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     // Actualizar un usuario existente
@@ -57,6 +78,7 @@ public class UsuarioController {
             usuarioExistente.setUsername(usuarioDetails.getUsername());
             usuarioExistente.setPassword(usuarioDetails.getPassword());
             usuarioExistente.setAvatar(usuarioDetails.getAvatar());
+            usuarioExistente.setFacultad(usuarioDetails.getFacultad());
             // Puedes actualizar otros campos específicos si los tuvieras
             Usuario usuarioActualizado = usuarioService.guardar(usuarioExistente);
             return ResponseEntity.ok(usuarioActualizado);

@@ -1,11 +1,13 @@
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\AsistenciasApplication.java
-C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Administrador.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Profesor.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\service\UsuarioService.java
-C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Usuario.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\JwtTokenProvider.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Estudiante.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\dto\UsuarioDTO.java
-C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\UsuarioRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\UsuarioController.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Administrador.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Usuario.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\UsuarioRepository.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\exception\UsuarioDuplicadoException.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\TipoUsuario.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\factory\UsuarioFactory.java
