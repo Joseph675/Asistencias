@@ -33,6 +33,7 @@ public class FacultadController {
     // Crear una nueva facultad
     @PostMapping
     public Facultad createFacultad(@RequestBody Facultad facultad) {
+        System.out.println("facultadId recibido: " + facultad.getFacultadId());
         return facultadRepository.save(facultad);
     }
 

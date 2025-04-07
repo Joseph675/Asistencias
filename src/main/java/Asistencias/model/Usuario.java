@@ -53,7 +53,7 @@ public abstract class Usuario {
     @Column(nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaActualizacion;
 
     @Column(nullable = false)

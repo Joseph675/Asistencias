@@ -13,7 +13,7 @@ public class Facultad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "facultadId", nullable = false, unique = true)
     private Long facultadId;
 
     @Column(nullable = false, length = 100)
@@ -25,10 +25,10 @@ public class Facultad {
     @Column(nullable = false)
     private Boolean activa = true;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, insertable = false)
     private LocalDateTime fechaCreacion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaActualizacion;
 
 
