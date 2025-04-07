@@ -1,34 +1,30 @@
 package Asistencias.dto;
 
 public class UsuarioDTO {
-    
+
     private Long idUsuario;
     private Long idUsuUni;
     private String nombre;
     private String email;
-    private String username;
-    private String avatar;
     private String facultad;
     private String carrera; // Propiedad específica de Estudiante
     private String especialidad; // Propiedad específica de Profesor
-    private String area; // Propiedad específica de Administrador
+    private String area; // Propiedad específica de Administrativo
     private String tipoUsuario;
 
     // Constructor sin argumentos
-    public UsuarioDTO() {
-    }
+    public UsuarioDTO() {}
 
     // Constructor con parámetros
-    public UsuarioDTO(Long idUsuUni, String nombre, String email, String username, String avatar, String facultad, String carrera, String especialidad, String area, String tipoUsuario) {
+    public UsuarioDTO(Long idUsuario, Long idUsuUni, String nombre, String email, String facultad, String carrera, String especialidad, String area, String tipoUsuario) {
+        this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
         this.nombre = nombre;
         this.email = email;
-        this.username = username;
-        this.avatar = avatar;
         this.facultad = facultad;
-        this.carrera = carrera; // Inicializar este campo
-        this.especialidad = especialidad; // Inicializar este campo
-        this.area = area; // Inicializar este campo
+        this.carrera = carrera;
+        this.especialidad = especialidad;
+        this.area = area;
         this.tipoUsuario = tipoUsuario;
     }
 
@@ -63,22 +59,6 @@ public class UsuarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getFacultad() {

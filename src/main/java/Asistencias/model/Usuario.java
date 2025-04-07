@@ -36,23 +36,12 @@ public abstract class Usuario {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false, length = 100)
-    private String apellido;
-
+   
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(nullable = false, length = 255)
     private String passwordHash;
-
-    @Column(nullable = true, length = 100)
-    private String carrera; // Campo específico para Estudiante
-
-    @Column(nullable = true, length = 100)
-    private String especialidad; // Campo específico para Profesor
-
-    @Column(nullable = true, length = 100)
-    private String area; // Campo específico para Administrativo
 
     @Column(nullable = true)
     @Temporal(TemporalType.DATE)
@@ -67,26 +56,26 @@ public abstract class Usuario {
     @Column(nullable = false)
     private LocalDateTime fechaActualizacion;
 
+    @Column(nullable = false)
+    private String facultad; 
+
     // Constructor sin argumentos
     public Usuario() {
     }
 
     // Constructor con parámetros
-    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String apellido, String email, String passwordHash, String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultad) {
         this.usuarioId = usuarioId;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.carrera = carrera;
-        this.especialidad = especialidad;
-        this.area = area;
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
+        this.facultad = facultad;
     }
 
     // Getters y Setters
@@ -122,14 +111,6 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -144,30 +125,6 @@ public abstract class Usuario {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public String getCarrera() {
-        return carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
     }
 
     public Date getFechaNacimiento() {
@@ -200,5 +157,13 @@ public abstract class Usuario {
 
     public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;   
     }
 }
