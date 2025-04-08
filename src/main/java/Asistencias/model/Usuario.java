@@ -20,7 +20,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public abstract class Usuario {
 
     @Id
@@ -50,21 +50,21 @@ public abstract class Usuario {
     @Column(nullable = false)
     private Boolean activo = true;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
     @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaActualizacion;
 
     @Column(nullable = false)
-    private String facultad; 
+    private String facultadId; 
 
     // Constructor sin argumentos
     public Usuario() {
     }
 
     // Constructor con parámetros
-    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultad) {
+    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultadId) {
         this.usuarioId = usuarioId;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -75,7 +75,7 @@ public abstract class Usuario {
         this.activo = activo;
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
-        this.facultad = facultad;
+        this.facultadId = facultadId;
     }
 
     // Getters y Setters
@@ -160,10 +160,10 @@ public abstract class Usuario {
     }
 
     public String getFacultad() {
-        return facultad;
+        return facultadId;
     }
 
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;   
+    public void setFacultad(String facultadId) {
+        this.facultadId = facultadId;   
     }
 }

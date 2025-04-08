@@ -8,11 +8,11 @@
         <version>3.2.6-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>Herramientas</groupId>
-    <artifactId>Asistencias</artifactId>
+    <groupId>POO</groupId>
+    <artifactId>Sistema_de_Asistencias</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Asistencias</name>
-    <description>Asistencias</description>
+    <name>Sistema de Asistencias</name>
+    <description>Sistema de Asistencias</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -63,10 +63,14 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
-
-
-
-        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

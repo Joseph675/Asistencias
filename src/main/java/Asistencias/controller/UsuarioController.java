@@ -36,8 +36,10 @@ public class UsuarioController {
                 .map(usuario -> new UsuarioDTO(
                         usuario.getUsuarioId(),
                         usuario.getIdUsuUni(),
+                        usuario.getCedula(),
                         usuario.getNombre(),
                         usuario.getEmail(),
+                        usuario.getPasswordHash(),
                         usuario.getFacultad(),
                         usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null,
                         usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null,
@@ -55,8 +57,10 @@ public class UsuarioController {
         return usuarioOpt.map(usuario -> ResponseEntity.ok(new UsuarioDTO(
                 usuario.getUsuarioId(),
                 usuario.getIdUsuUni(),
+                usuario.getCedula(),
                 usuario.getNombre(),
                 usuario.getEmail(),
+                usuario.getPasswordHash(),
                 usuario.getFacultad(),
                 usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null,
                 usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null,
@@ -74,8 +78,10 @@ public class UsuarioController {
             UsuarioDTO nuevoUsuarioDTO = new UsuarioDTO(
                     nuevoUsuario.getUsuarioId(),
                     nuevoUsuario.getIdUsuUni(),
+                    nuevoUsuario.getCedula(),
                     nuevoUsuario.getNombre(),
                     nuevoUsuario.getEmail(),
+                    nuevoUsuario.getPasswordHash(),
                     nuevoUsuario.getFacultad(),
                     nuevoUsuario instanceof Estudiante ? ((Estudiante) nuevoUsuario).getCarrera() : null,
                     nuevoUsuario instanceof Profesor ? ((Profesor) nuevoUsuario).getEspecialidad() : null,
@@ -96,8 +102,10 @@ public class UsuarioController {
             UsuarioDTO usuarioActualizadoDTO = new UsuarioDTO(
                     usuarioActualizado.getUsuarioId(),
                     usuarioActualizado.getIdUsuUni(),
+                    usuarioActualizado.getCedula(),
                     usuarioActualizado.getNombre(),
                     usuarioActualizado.getEmail(),
+                    usuarioActualizado.getPasswordHash(),
                     usuarioActualizado.getFacultad(),
                     usuarioActualizado instanceof Estudiante ? ((Estudiante) usuarioActualizado).getCarrera() : null,
                     usuarioActualizado instanceof Profesor ? ((Profesor) usuarioActualizado).getEspecialidad() : null,

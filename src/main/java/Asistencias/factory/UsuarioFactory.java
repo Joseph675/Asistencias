@@ -7,7 +7,12 @@ import Asistencias.model.Estudiante;
 import Asistencias.model.Profesor;
 import Asistencias.model.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
 public class UsuarioFactory {
+
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * Crear una instancia de Usuario basada en el tipo de usuario especificado en el DTO.
@@ -15,15 +20,16 @@ public class UsuarioFactory {
      * @return Instancia de Usuario (Estudiante, Profesor, Administrativo, Administrador).
      */
     public static Usuario crearUsuario(UsuarioDTO usuarioDTO) {
-        switch (usuarioDTO.getTipoUsuario().toLowerCase()) {
+        String passwordHash = passwordEncoder.encode(usuarioDTO.getPassword());
+        switch (usuarioDTO.getTipo().toLowerCase()) {
             case "alumno": // Caso para Estudiante
                 return new Estudiante(
                     usuarioDTO.getIdUsuario(), // Long usuarioId
                     usuarioDTO.getIdUsuUni(), // Long idUsuUni
-                    null, // Integer cedula (puedes ajustarlo si es necesario)
+                    usuarioDTO.getCedula(), // Long idUsuUni
                     usuarioDTO.getNombre(), // String nombre
                     usuarioDTO.getEmail(), // String email
-                    null, // String passwordHash (debe manejarse aparte)
+                    passwordHash, 
                     usuarioDTO.getCarrera(), // String carrera
                     null, // Date fechaNacimiento (si aplica)
                     true, // Boolean activo por defecto
@@ -35,10 +41,11 @@ public class UsuarioFactory {
                 return new Profesor(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    null, // Cedula
+                    usuarioDTO.getCedula(), // Long idUsuUni
+
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
-                    null, // PasswordHash
+                    passwordHash, 
                     usuarioDTO.getEspecialidad(), // Campo específico de Profesor
                     null, // Fecha de nacimiento
                     true, // Activo
@@ -50,10 +57,10 @@ public class UsuarioFactory {
                 return new Administrativo(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    null, // Cedula
+                    usuarioDTO.getCedula(), // Long idUsuUni
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
-                    null, // PasswordHash
+                    passwordHash, 
                     usuarioDTO.getArea(), // Campo específico de Administrativo
                     null, // Fecha de nacimiento
                     true, // Activo
@@ -65,7 +72,8 @@ public class UsuarioFactory {
                 return new Administrador(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    null, // Cedula
+                    usuarioDTO.getCedula(), // Long idUsuUni
+
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
                     null, // PasswordHash
@@ -76,7 +84,7 @@ public class UsuarioFactory {
                     usuarioDTO.getFacultad()
                 );
             default:
-                throw new IllegalArgumentException("Tipo de usuario no válido: " + usuarioDTO.getTipoUsuario());
+                throw new IllegalArgumentException("Tipo de usuario no válido: " + usuarioDTO.getTipo());
         }
     }
 }

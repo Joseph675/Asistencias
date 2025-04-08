@@ -4,28 +4,32 @@ public class UsuarioDTO {
 
     private Long idUsuario;
     private Long idUsuUni;
+    private Integer cedula;
     private String nombre;
     private String email;
-    private String facultad;
+    private String facultadId;
     private String carrera; // Propiedad específica de Estudiante
     private String especialidad; // Propiedad específica de Profesor
     private String area; // Propiedad específica de Administrativo
-    private String tipoUsuario;
+    private String tipo;
+    private String password;
 
     // Constructor sin argumentos
     public UsuarioDTO() {}
 
     // Constructor con parámetros
-    public UsuarioDTO(Long idUsuario, Long idUsuUni, String nombre, String email, String facultad, String carrera, String especialidad, String area, String tipoUsuario) {
+    public UsuarioDTO(Long idUsuario, Long idUsuUni, Integer cedula, String nombre, String email, String facultadId, String carrera, String especialidad, String area, String tipo, String password) {
         this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
+        this.cedula = cedula;
         this.nombre = nombre;
         this.email = email;
-        this.facultad = facultad;
+        this.facultadId = facultadId;
         this.carrera = carrera;
         this.especialidad = especialidad;
         this.area = area;
-        this.tipoUsuario = tipoUsuario;
+        this.tipo = tipo;
+        this.password = password;
     }
 
     // Getters y Setters
@@ -45,6 +49,14 @@ public class UsuarioDTO {
         this.idUsuUni = idUsuUni;
     }
 
+    public Integer getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Integer cedula) {
+        this.cedula = cedula;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -62,11 +74,11 @@ public class UsuarioDTO {
     }
 
     public String getFacultad() {
-        return facultad;
+        return facultadId;
     }
 
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
+    public void setFacultad(String facultadId) {
+        this.facultadId = facultadId;
     }
 
     public String getCarrera() {
@@ -93,11 +105,19 @@ public class UsuarioDTO {
         this.area = area;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
