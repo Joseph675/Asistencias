@@ -34,7 +34,7 @@ public class Carrera {
     @Column(nullable = false)
     private Boolean activa = true;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
 
