@@ -1,5 +1,7 @@
 package Asistencias.dto;
 
+import java.util.Date;
+
 public class UsuarioDTO {
 
     private Long idUsuario;
@@ -7,18 +9,21 @@ public class UsuarioDTO {
     private Integer cedula;
     private String nombre;
     private String email;
-    private String facultadId;
+    private Integer facultadId;
     private String carrera; // Propiedad específica de Estudiante
     private String especialidad; // Propiedad específica de Profesor
     private String area; // Propiedad específica de Administrativo
+    private Date fechaNacimiento; 
+    private Boolean activo; 
     private String tipo;
-    private String password;
+    private String passwordHash;
 
     // Constructor sin argumentos
     public UsuarioDTO() {}
 
-    // Constructor con parámetros
-    public UsuarioDTO(Long idUsuario, Long idUsuUni, Integer cedula, String nombre, String email, String facultadId, String carrera, String especialidad, String area, String tipo, String password) {
+    public UsuarioDTO(Long idUsuario, Long idUsuUni, Integer cedula, String nombre, String email, Integer facultadId,
+            String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, String tipo,
+            String passwordHash) {
         this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -28,11 +33,12 @@ public class UsuarioDTO {
         this.carrera = carrera;
         this.especialidad = especialidad;
         this.area = area;
+        this.fechaNacimiento = fechaNacimiento;
+        this.activo = activo;
         this.tipo = tipo;
-        this.password = password;
+        this.passwordHash = passwordHash;
     }
 
-    // Getters y Setters
     public Long getIdUsuario() {
         return idUsuario;
     }
@@ -73,11 +79,11 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public String getFacultad() {
+    public Integer getFacultadId() {
         return facultadId;
     }
 
-    public void setFacultad(String facultadId) {
+    public void setFacultadId(Integer facultadId) {
         this.facultadId = facultadId;
     }
 
@@ -105,6 +111,22 @@ public class UsuarioDTO {
         this.area = area;
     }
 
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -113,11 +135,16 @@ public class UsuarioDTO {
         this.tipo = tipo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
     
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
+
+    
 }

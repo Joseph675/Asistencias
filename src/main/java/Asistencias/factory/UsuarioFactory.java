@@ -9,6 +9,7 @@ import Asistencias.model.Usuario;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Date;
 
 public class UsuarioFactory {
 
@@ -20,68 +21,66 @@ public class UsuarioFactory {
      * @return Instancia de Usuario (Estudiante, Profesor, Administrativo, Administrador).
      */
     public static Usuario crearUsuario(UsuarioDTO usuarioDTO) {
-        String passwordHash = passwordEncoder.encode(usuarioDTO.getPassword());
+        String passwordHash = passwordEncoder.encode(usuarioDTO.getPasswordHash());
         switch (usuarioDTO.getTipo().toLowerCase()) {
             case "alumno": // Caso para Estudiante
                 return new Estudiante(
-                    usuarioDTO.getIdUsuario(), // Long usuarioId
-                    usuarioDTO.getIdUsuUni(), // Long idUsuUni
-                    usuarioDTO.getCedula(), // Long idUsuUni
-                    usuarioDTO.getNombre(), // String nombre
-                    usuarioDTO.getEmail(), // String email
-                    passwordHash, 
-                    usuarioDTO.getCarrera(), // String carrera
-                    null, // Date fechaNacimiento (si aplica)
-                    true, // Boolean activo por defecto
-                    null, // LocalDateTime fechaCreacion (se genera automáticamente)
-                    null, // LocalDateTime fechaActualizacion (se genera automáticamente)
-                    usuarioDTO.getFacultad() // String facultad
-    );
+                    usuarioDTO.getIdUsuario(),
+                    usuarioDTO.getIdUsuUni(),
+                    usuarioDTO.getCedula(),
+                    usuarioDTO.getNombre(),
+                    usuarioDTO.getEmail(),
+                    passwordHash,
+                    usuarioDTO.getCarrera(),
+                    usuarioDTO.getFechaNacimiento(), // Asignar fecha de nacimiento
+                    usuarioDTO.getActivo(), // Asignar estado activo
+                    null, // Fecha de creación (se genera automáticamente)
+                    null, // Fecha de actualización (se genera automáticamente)
+                    usuarioDTO.getFacultadId() // Asignar facultadId
+                );
             case "profesor": // Caso para Profesor
                 return new Profesor(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    usuarioDTO.getCedula(), // Long idUsuUni
-
+                    usuarioDTO.getCedula(),
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
-                    passwordHash, 
+                    passwordHash,
                     usuarioDTO.getEspecialidad(), // Campo específico de Profesor
-                    null, // Fecha de nacimiento
-                    true, // Activo
+                    usuarioDTO.getFechaNacimiento(), // Asignar fecha de nacimiento
+                    usuarioDTO.getActivo(), // Asignar estado activo
                     null, // Fecha de creación
                     null, // Fecha de actualización
-                    usuarioDTO.getFacultad()
+                    usuarioDTO.getFacultadId() // Asignar facultadId
                 );
             case "administrativo": // Caso para Administrativo
                 return new Administrativo(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    usuarioDTO.getCedula(), // Long idUsuUni
+                    usuarioDTO.getCedula(),
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
-                    passwordHash, 
+                    passwordHash,
                     usuarioDTO.getArea(), // Campo específico de Administrativo
-                    null, // Fecha de nacimiento
-                    true, // Activo
+                    usuarioDTO.getFechaNacimiento(), // Asignar fecha de nacimiento
+                    usuarioDTO.getActivo(), // Asignar estado activo
                     null, // Fecha de creación
                     null, // Fecha de actualización
-                    usuarioDTO.getFacultad()
+                    usuarioDTO.getFacultadId() // Asignar facultadId
                 );
             case "admin": // Caso para Administrador
                 return new Administrador(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
-                    usuarioDTO.getCedula(), // Long idUsuUni
-
+                    usuarioDTO.getCedula(),
                     usuarioDTO.getNombre(),
                     usuarioDTO.getEmail(),
-                    null, // PasswordHash
-                    null, // Fecha de nacimiento
-                    true, // Activo
+                    passwordHash, // Asignar passwordHash
+                    usuarioDTO.getFechaNacimiento(), // Asignar fecha de nacimiento
+                    usuarioDTO.getActivo(), // Asignar estado activo
                     null, // Fecha de creación
                     null, // Fecha de actualización
-                    usuarioDTO.getFacultad()
+                    usuarioDTO.getFacultadId() // Asignar facultadId
                 );
             default:
                 throw new IllegalArgumentException("Tipo de usuario no válido: " + usuarioDTO.getTipo());

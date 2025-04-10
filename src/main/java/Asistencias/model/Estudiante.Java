@@ -18,8 +18,8 @@ public class Estudiante extends Usuario {
     public Estudiante() {}
 
     // Constructor con parámetros
-    public Estudiante(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String carrera, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultad) {
-        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultad);
+    public Estudiante(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String carrera, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
+        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId);
         this.carrera = carrera;
     }
 

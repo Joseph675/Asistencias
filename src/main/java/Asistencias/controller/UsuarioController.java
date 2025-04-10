@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,13 +40,15 @@ public class UsuarioController {
                         usuario.getCedula(),
                         usuario.getNombre(),
                         usuario.getEmail(),
-                        usuario.getPasswordHash(),
-                        usuario.getFacultad(),
+                        usuario.getFacultadId(),
                         usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null,
                         usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null,
                         usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
-                        usuario.getClass().getSimpleName().toLowerCase()
-                ))
+                        usuario.getFechaNacimiento() != null ? new java.sql.Date(usuario.getFechaNacimiento().getTime())
+                                : null,
+                        usuario.getActivo(),
+                        usuario.getTipo(),
+                        usuario.getPasswordHash()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
     }
@@ -60,18 +63,22 @@ public class UsuarioController {
                 usuario.getCedula(),
                 usuario.getNombre(),
                 usuario.getEmail(),
-                usuario.getPasswordHash(),
-                usuario.getFacultad(),
+                usuario.getFacultadId(),
                 usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null,
                 usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null,
                 usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
-                usuario.getClass().getSimpleName().toLowerCase()
-        ))).orElseGet(() -> ResponseEntity.notFound().build());
+                usuario.getFechaNacimiento(),
+                usuario.getActivo(),
+                usuario.getTipo(),
+                usuario.getPasswordHash()))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Crear un nuevo usuario
     @PostMapping
     public ResponseEntity<?> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        if (usuarioDTO.getPasswordHash() == null || usuarioDTO.getPasswordHash().isEmpty()) {
+            return ResponseEntity.badRequest().body("passwordHash cannot be null");
+        }
         try {
             Usuario usuario = UsuarioFactory.crearUsuario(usuarioDTO);
             Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
@@ -81,13 +88,14 @@ public class UsuarioController {
                     nuevoUsuario.getCedula(),
                     nuevoUsuario.getNombre(),
                     nuevoUsuario.getEmail(),
-                    nuevoUsuario.getPasswordHash(),
-                    nuevoUsuario.getFacultad(),
+                    nuevoUsuario.getFacultadId(),
                     nuevoUsuario instanceof Estudiante ? ((Estudiante) nuevoUsuario).getCarrera() : null,
                     nuevoUsuario instanceof Profesor ? ((Profesor) nuevoUsuario).getEspecialidad() : null,
                     nuevoUsuario instanceof Administrativo ? ((Administrativo) nuevoUsuario).getArea() : null,
-                    nuevoUsuario.getClass().getSimpleName().toLowerCase()
-            );
+                    nuevoUsuario.getFechaNacimiento(),
+                    nuevoUsuario.getActivo(),
+                    nuevoUsuario.getTipo(),
+                    nuevoUsuario.getPasswordHash());
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuarioDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -105,13 +113,15 @@ public class UsuarioController {
                     usuarioActualizado.getCedula(),
                     usuarioActualizado.getNombre(),
                     usuarioActualizado.getEmail(),
-                    usuarioActualizado.getPasswordHash(),
-                    usuarioActualizado.getFacultad(),
+                    usuarioActualizado.getFacultadId(),
                     usuarioActualizado instanceof Estudiante ? ((Estudiante) usuarioActualizado).getCarrera() : null,
                     usuarioActualizado instanceof Profesor ? ((Profesor) usuarioActualizado).getEspecialidad() : null,
-                    usuarioActualizado instanceof Administrativo ? ((Administrativo) usuarioActualizado).getArea() : null,
-                    usuarioActualizado.getClass().getSimpleName().toLowerCase()
-            );
+                    usuarioActualizado instanceof Administrativo ? ((Administrativo) usuarioActualizado).getArea()
+                            : null,
+                    usuarioActualizado.getFechaNacimiento(),
+                    usuarioActualizado.getActivo(),
+                    usuarioActualizado.getTipo(),
+                    usuarioActualizado.getPasswordHash());
             return ResponseEntity.ok(usuarioActualizadoDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

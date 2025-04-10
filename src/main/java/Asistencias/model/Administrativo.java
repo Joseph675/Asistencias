@@ -18,8 +18,8 @@ public class Administrativo extends Usuario {
     public Administrativo() {}
 
     // Constructor con parámetros
-    public Administrativo(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String area, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultad) {
-        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultad);
+    public Administrativo(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String area, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
+        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId);
         this.area = area;
     }
 

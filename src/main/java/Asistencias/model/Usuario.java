@@ -57,14 +57,17 @@ public abstract class Usuario {
     private LocalDateTime fechaActualizacion;
 
     @Column(nullable = false)
-    private String facultadId; 
+    private Integer facultadId; 
+
+    @Column(name = "tipo", insertable = false, updatable = false)
+    private String tipo;
 
     // Constructor sin argumentos
     public Usuario() {
     }
 
     // Constructor con parámetros
-    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, String facultadId) {
+    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
         this.usuarioId = usuarioId;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -159,11 +162,19 @@ public abstract class Usuario {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public String getFacultad() {
+    public Integer getFacultadId() {
         return facultadId;
     }
 
-    public void setFacultad(String facultadId) {
-        this.facultadId = facultadId;   
+
+    public void setFacultadId(Integer facultadId) {
+        this.facultadId = facultadId;
     }
+
+    public String getTipo() {
+        return tipo;
+    
+    
+}
+
 }
