@@ -51,13 +51,13 @@ public class UsuarioService {
 
     /**
      * Eliminar un usuario por su ID.
-     * @param id ID del usuario a eliminar.
+     * @param usuarioId ID del usuario a eliminar.
      */
-    public void eliminar(Long id) {
-        if (!usuarioRepository.existsById(id)) {
-            throw new IllegalArgumentException("El usuario con ID " + id + " no existe.");
+    public void eliminar(Long usuarioId) {
+        if (!usuarioRepository.existsById(usuarioId)) {
+            throw new IllegalArgumentException("El usuario con idUsuUni " + usuarioId + " no existe. Aquiii");
         }
-        usuarioRepository.deleteById(id);
+        usuarioRepository.deleteById(usuarioId);
     }
 
     /**
@@ -68,10 +68,13 @@ public class UsuarioService {
      */
     public Usuario registrarUsuario(Usuario usuario) {
         if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
-            throw new UsuarioDuplicadoException("El email ya está registrado.");
+            throw new UsuarioDuplicadoException("El Email ya está registrado.");
         }
         if (usuarioRepository.findByIdUsuUni(usuario.getIdUsuUni()).isPresent()) {
-            throw new UsuarioDuplicadoException("El ID de usuario universitario ya está registrado.");
+            throw new UsuarioDuplicadoException("El ID universitario ya está registrado.");
+        }
+        if (usuarioRepository.findByCedula(usuario.getCedula()).isPresent()) {
+            throw new UsuarioDuplicadoException("La Cedula ya está registrada.");
         }
         return usuarioRepository.save(usuario);
     }

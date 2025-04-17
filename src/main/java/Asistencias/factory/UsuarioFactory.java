@@ -22,7 +22,7 @@ public class UsuarioFactory {
      */
     public static Usuario crearUsuario(UsuarioDTO usuarioDTO) {
         String passwordHash = passwordEncoder.encode(usuarioDTO.getPasswordHash());
-        switch (usuarioDTO.getTipo().toLowerCase()) {
+        switch (usuarioDTO.getTipo()) {
             case "Alumno": // Caso para Estudiante
                 return new Estudiante(
                     usuarioDTO.getIdUsuario(),

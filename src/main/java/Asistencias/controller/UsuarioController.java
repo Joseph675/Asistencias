@@ -129,9 +129,9 @@ public class UsuarioController {
     }
 
     // Eliminar un usuario por ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
-        usuarioService.eliminar(id);
+    @DeleteMapping("/{usuarioId}")
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Long usuarioId) {
+        usuarioService.eliminar(usuarioId);
         return ResponseEntity.noContent().build();
     }
 }
