@@ -6,7 +6,7 @@ import java.util.Date;
 import java.time.LocalDateTime;
 
 @Entity
-@DiscriminatorValue("admin") // Valor del tipo en la columna "tipo"
+@DiscriminatorValue("Admin") // Valor del tipo en la columna "tipo"
 public class Administrador extends Usuario {
 
 

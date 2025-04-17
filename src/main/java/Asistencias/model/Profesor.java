@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue("profesor") // Valor del tipo en la columna "tipo"
+@DiscriminatorValue("Profesor") // Valor del tipo en la columna "tipo"
 public class Profesor extends Usuario {
 
     @Column(nullable = true, length = 100)

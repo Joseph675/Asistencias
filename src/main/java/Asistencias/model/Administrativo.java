@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@DiscriminatorValue("administrativo") // Valor del tipo en la columna "tipo"
+@DiscriminatorValue("Administrativo") // Valor del tipo en la columna "tipo"
 public class Administrativo extends Usuario {
 
     @Column(nullable = true, length = 100)

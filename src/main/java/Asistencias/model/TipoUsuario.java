@@ -1,7 +1,8 @@
 package Asistencias.model;
 
 public enum TipoUsuario {
-    ESTUDIANTE,
-    PROFESOR,
-    ADMINISTRADOR
+    Alumno,
+    Profesor,
+    Administrativo,
+    Admin
 }

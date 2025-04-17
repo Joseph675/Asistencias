@@ -23,7 +23,7 @@ public class UsuarioFactory {
     public static Usuario crearUsuario(UsuarioDTO usuarioDTO) {
         String passwordHash = passwordEncoder.encode(usuarioDTO.getPasswordHash());
         switch (usuarioDTO.getTipo().toLowerCase()) {
-            case "alumno": // Caso para Estudiante
+            case "Alumno": // Caso para Estudiante
                 return new Estudiante(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
@@ -38,7 +38,7 @@ public class UsuarioFactory {
                     null, // Fecha de actualización (se genera automáticamente)
                     usuarioDTO.getFacultadId() // Asignar facultadId
                 );
-            case "profesor": // Caso para Profesor
+            case "Profesor": // Caso para Profesor
                 return new Profesor(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
@@ -53,7 +53,7 @@ public class UsuarioFactory {
                     null, // Fecha de actualización
                     usuarioDTO.getFacultadId() // Asignar facultadId
                 );
-            case "administrativo": // Caso para Administrativo
+            case "Administrativo": // Caso para Administrativo
                 return new Administrativo(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),
@@ -68,7 +68,7 @@ public class UsuarioFactory {
                     null, // Fecha de actualización
                     usuarioDTO.getFacultadId() // Asignar facultadId
                 );
-            case "admin": // Caso para Administrador
+            case "Admin": // Caso para Administrador
                 return new Administrador(
                     usuarioDTO.getIdUsuario(),
                     usuarioDTO.getIdUsuUni(),

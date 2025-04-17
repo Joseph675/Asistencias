@@ -12,10 +12,10 @@ import java.util.Date;
     property = "tipoUsuario" // Esta propiedad deberá venir en el JSON
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = Estudiante.class, name = "alumno"),
-    @JsonSubTypes.Type(value = Profesor.class, name = "profesor"),
-    @JsonSubTypes.Type(value = Administrativo.class, name = "administrativo"),
-    @JsonSubTypes.Type(value = Administrador.class, name = "admin")
+    @JsonSubTypes.Type(value = Estudiante.class, name = "Alumno"),
+    @JsonSubTypes.Type(value = Profesor.class, name = "Profesor"),
+    @JsonSubTypes.Type(value = Administrativo.class, name = "Administrativo"),
+    @JsonSubTypes.Type(value = Administrador.class, name = "Admin")
 })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)

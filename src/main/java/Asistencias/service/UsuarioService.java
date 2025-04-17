@@ -95,7 +95,7 @@ public class UsuarioService {
         usuarioExistente.setIdUsuUni(usuarioDTO.getIdUsuUni());
         usuarioExistente.setNombre(usuarioDTO.getNombre());
         usuarioExistente.setEmail(usuarioDTO.getEmail());
-        usuarioExistente.setFacultad(usuarioDTO.getFacultad());
+        usuarioExistente.setFacultadId(usuarioDTO.getFacultadId());
 
         // Actualizar campos específicos según el tipo de usuario
         if (usuarioExistente instanceof Estudiante && usuarioDTO.getCarrera() != null) {
