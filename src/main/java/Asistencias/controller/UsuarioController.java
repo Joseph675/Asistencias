@@ -120,7 +120,7 @@ public class UsuarioController {
                             : null,
                     usuarioActualizado.getFechaNacimiento(),
                     usuarioActualizado.getActivo(),
-                    usuarioActualizado.getTipo(),
+                    usuarioDTO.getTipo(),
                     usuarioActualizado.getPasswordHash());
             return ResponseEntity.ok(usuarioActualizadoDTO);
         } catch (IllegalArgumentException e) {

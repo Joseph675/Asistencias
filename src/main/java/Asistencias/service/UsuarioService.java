@@ -95,10 +95,15 @@ public class UsuarioService {
         Usuario usuarioExistente = usuarioOpt.get();
 
         // Actualizar los campos comunes
+        usuarioExistente.setTipo(usuarioDTO.getTipo());
         usuarioExistente.setIdUsuUni(usuarioDTO.getIdUsuUni());
+        usuarioExistente.setCedula(usuarioDTO.getCedula());
         usuarioExistente.setNombre(usuarioDTO.getNombre());
         usuarioExistente.setEmail(usuarioDTO.getEmail());
         usuarioExistente.setFacultadId(usuarioDTO.getFacultadId());
+        usuarioExistente.setActivo(usuarioDTO.getActivo());
+        usuarioExistente.setFechaNacimiento(usuarioDTO.getFechaNacimiento());
+
 
         // Actualizar campos específicos según el tipo de usuario
         if (usuarioExistente instanceof Estudiante && usuarioDTO.getCarrera() != null) {

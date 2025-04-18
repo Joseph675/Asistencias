@@ -1,22 +1,10 @@
 package Asistencias.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "tipoUsuario" // Esta propiedad deberá venir en el JSON
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Estudiante.class, name = "Alumno"),
-    @JsonSubTypes.Type(value = Profesor.class, name = "Profesor"),
-    @JsonSubTypes.Type(value = Administrativo.class, name = "Administrativo"),
-    @JsonSubTypes.Type(value = Administrador.class, name = "Admin")
-})
+
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @Entity
@@ -56,12 +44,15 @@ public abstract class Usuario {
     @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaActualizacion;
 
-    @Column(nullable = false)
+    @Column()
     private Integer facultadId; 
 
     @Column(name = "tipo", insertable = false, updatable = false)
-    private String tipo;
+    private String tipo; // Gestionado por JPA, pero accesible desde el código
 
+
+
+    
     // Constructor sin argumentos
     public Usuario() {
     }
@@ -173,8 +164,11 @@ public abstract class Usuario {
 
     public String getTipo() {
         return tipo;
-    
-    
-}
+    }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    
 }
