@@ -5,7 +5,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("PRESENCIAL")
+@DiscriminatorValue("Presencial") // Valor del tipo en la columna "tipo"
 public class CursoPresencial extends Curso {
 
     @Column(length = 50)

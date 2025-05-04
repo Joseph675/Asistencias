@@ -142,6 +142,6 @@ public class Materia {
     }
 
     public enum Cuatrimestre {
-        PRIMERO, SEGUNDO, ANUAL
+        Primer,Segundo,Anual
     }
 }
