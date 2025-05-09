@@ -49,9 +49,6 @@ public abstract class Usuario {
 
     @Column(name = "tipo", insertable = false, updatable = false)
     private String tipo; // Gestionado por JPA, pero accesible desde el código
-
-
-
     
     // Constructor sin argumentos
     public Usuario() {

@@ -1,10 +1,22 @@
 package Asistencias.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "tipoCurso"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = CursoPresencial.class, name = "Presencial"),
+    @JsonSubTypes.Type(value = CursoVirtual.class, name = "Virtual")
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipoCurso", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "cursos")
 public abstract class Curso {
 
@@ -21,9 +33,6 @@ public abstract class Curso {
     @Column(name = "profesorId", nullable = false)
     private Integer profesorId;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String horario;
-
     @Column(name = "cicloLectivo", nullable = false)
     private Integer cicloLectivo;
 
@@ -31,9 +40,27 @@ public abstract class Curso {
     @Column(nullable = false)
     private Cuatrimestre cuatrimestre;
 
+    @Column(name = "horasSemanales", nullable = false)
+    private Integer horasSemanales;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Estado estado;
+
+    public Curso() {
+    }
+
+    public Curso(Integer id, Integer cursoPk, Integer materiaPk, Integer profesorId, Integer cicloLectivo,
+            Cuatrimestre cuatrimestre, Integer horasSemanales, Estado estado) {
+        this.id = id;
+        this.cursoPk = cursoPk;
+        this.materiaPk = materiaPk;
+        this.profesorId = profesorId;
+        this.cicloLectivo = cicloLectivo;
+        this.cuatrimestre = cuatrimestre;
+        this.horasSemanales = horasSemanales;
+        this.estado = estado;
+    }
 
     // Getters y Setters
     public Integer getId() {
@@ -68,12 +95,12 @@ public abstract class Curso {
         this.profesorId = profesorId;
     }
 
-    public String getHorario() {
-        return horario;
+    public Integer getHorasSemanales() {
+        return horasSemanales;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setHorasSemanales(Integer horasSemanales) {
+        this.horasSemanales = horasSemanales;
     }
 
     public Integer getCicloLectivo() {
@@ -101,10 +128,10 @@ public abstract class Curso {
     }
 
     public enum Cuatrimestre {
-        PRIMERO, SEGUNDO, ANUAL
+        Primer,Segundo,Anual
     }
 
     public enum Estado {
-        PLANIFICADO, EN_CURSO, FINALIZADO
+        Planificado, En_Curso, Finalizado
     }
 }

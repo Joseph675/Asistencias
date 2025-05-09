@@ -32,6 +32,7 @@ public class CursoController {
         return curso.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+   
     // Crear un curso (presencial o virtual)
     @PostMapping
     public ResponseEntity<Curso> createCurso(@RequestBody Curso curso) {
@@ -53,9 +54,9 @@ public class CursoController {
             // Actualizar campos comunes
             curso.setMateriaPk(cursoDetails.getMateriaPk());
             curso.setProfesorId(cursoDetails.getProfesorId());
-            curso.setHorario(cursoDetails.getHorario());
             curso.setCicloLectivo(cursoDetails.getCicloLectivo());
             curso.setCuatrimestre(cursoDetails.getCuatrimestre());
+            curso.setHorasSemanales(cursoDetails.getHorasSemanales());
             curso.setEstado(cursoDetails.getEstado());
 
             // Actualizar campos específicos según el tipo de curso

@@ -38,14 +38,10 @@ public class MateriaController {
         Optional<Materia> materiaOptional = materiaService.getMateriaById(id);
         if (materiaOptional.isPresent()) {
             Materia materia = materiaOptional.get();
+            materia.setMateriaPk(materiaDetails.getMateriaPk());
             materia.setNombre(materiaDetails.getNombre());
             materia.setCodigo(materiaDetails.getCodigo());
             materia.setCreditos(materiaDetails.getCreditos());
-            materia.setCarreraPk(materiaDetails.getCarreraPk());
-            materia.setCupoMaximo(materiaDetails.getCupoMaximo());
-            materia.setAnioCursada(materiaDetails.getAnioCursada());
-            materia.setCuatrimestre(materiaDetails.getCuatrimestre());
-            materia.setHorasSemanales(materiaDetails.getHorasSemanales());
             materia.setDescripcion(materiaDetails.getDescripcion());
             materia.setActiva(materiaDetails.getActiva());
             return ResponseEntity.ok(materiaService.saveMateria(materia));

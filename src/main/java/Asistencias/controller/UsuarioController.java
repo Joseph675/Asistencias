@@ -6,6 +6,8 @@ import Asistencias.model.Administrativo;
 import Asistencias.model.Estudiante;
 import Asistencias.model.Profesor;
 import Asistencias.model.Usuario;
+import Asistencias.repository.CursoRepository;
+import Asistencias.repository.UsuarioRepository;
 import Asistencias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,6 +73,50 @@ public class UsuarioController {
                 usuario.getActivo(),
                 usuario.getTipo(),
                 usuario.getPasswordHash()))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/profesores")
+    public ResponseEntity<List<UsuarioDTO>> getProfesores() {
+        List<UsuarioDTO> profesoresDTO = usuarioService.obtenerProfesores()
+                .stream()
+                .map(profesor -> new UsuarioDTO(
+                        profesor.getUsuarioId(),
+                        profesor.getIdUsuUni(),
+                        profesor.getCedula(),
+                        profesor.getNombre(),
+                        profesor.getEmail(),
+                        profesor.getFacultadId(),
+                        null, // Los profesores no tienen carrera
+                        profesor instanceof Profesor ? ((Profesor) profesor).getEspecialidad() : null,
+                        null, // Los profesores no tienen área
+                        profesor.getFechaNacimiento(),
+                        profesor.getActivo(),
+                        profesor.getTipo(),
+                        profesor.getPasswordHash()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(profesoresDTO);
+    }
+
+    @GetMapping("/alumno")
+    public ResponseEntity<List<UsuarioDTO>> getAlumnos() {
+        List<UsuarioDTO> alumnosDTO = usuarioService.obtenerAlumnos()
+                .stream()
+                .map(alumno -> new UsuarioDTO(
+                        alumno.getUsuarioId(),
+                        alumno.getIdUsuUni(),
+                        alumno.getCedula(),
+                        alumno.getNombre(),
+                        alumno.getEmail(),
+                        alumno.getFacultadId(),
+                        alumno instanceof Estudiante ? ((Estudiante) alumno).getCarrera() : null,
+                        null, // Los alumnos no tienen especialidad
+                        null, // Los profesores no tienen área
+                        alumno.getFechaNacimiento(),
+                        alumno.getActivo(),
+                        alumno.getTipo(),
+                        alumno.getPasswordHash()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(alumnosDTO);
     }
 
     // Crear un nuevo usuario

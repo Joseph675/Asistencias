@@ -21,28 +21,27 @@ public class Materia {
 
     @Column(nullable = false)
     private Integer creditos;
-
-    @Column(name = "carreraPk", nullable = false)
-    private Integer carreraPk;
-
-    @Column(name = "cupoMaximo")
-    private Integer cupoMaximo;
-
-    @Column(name = "anioCursada", nullable = false)
-    private Integer anioCursada;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Cuatrimestre cuatrimestre;
-
-    @Column(name = "horasSemanales", nullable = false)
-    private Integer horasSemanales;
-
+ 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
     @Column(nullable = false)
     private Boolean activa = true;
+
+
+    public Materia() {
+    }
+
+    public Materia(Integer id, Integer materiaPk, String nombre, String codigo, Integer creditos, String descripcion,
+            Boolean activa) {
+        this.id = id;
+        this.materiaPk = materiaPk;
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.creditos = creditos;
+        this.descripcion = descripcion;
+        this.activa = activa;
+    }
 
     // Getters y Setters
     public Integer getId() {
@@ -85,46 +84,6 @@ public class Materia {
         this.creditos = creditos;
     }
 
-    public Integer getCarreraPk() {
-        return carreraPk;
-    }
-
-    public void setCarreraPk(Integer carreraPk) {
-        this.carreraPk = carreraPk;
-    }
-
-    public Integer getCupoMaximo() {
-        return cupoMaximo;
-    }
-
-    public void setCupoMaximo(Integer cupoMaximo) {
-        this.cupoMaximo = cupoMaximo;
-    }
-
-    public Integer getAnioCursada() {
-        return anioCursada;
-    }
-
-    public void setAnioCursada(Integer anioCursada) {
-        this.anioCursada = anioCursada;
-    }
-
-    public Cuatrimestre getCuatrimestre() {
-        return cuatrimestre;
-    }
-
-    public void setCuatrimestre(Cuatrimestre cuatrimestre) {
-        this.cuatrimestre = cuatrimestre;
-    }
-
-    public Integer getHorasSemanales() {
-        return horasSemanales;
-    }
-
-    public void setHorasSemanales(Integer horasSemanales) {
-        this.horasSemanales = horasSemanales;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -141,7 +100,5 @@ public class Materia {
         this.activa = activa;
     }
 
-    public enum Cuatrimestre {
-        Primer,Segundo,Anual
-    }
+    
 }

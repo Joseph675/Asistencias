@@ -40,6 +40,15 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
+
+    public List<Usuario> obtenerProfesores() {
+        return usuarioRepository.findByTipo("Profesor");
+    }
+
+    public List<Usuario> obtenerAlumnos() {
+        return usuarioRepository.findByTipo("Alumno");
+    }
+
     /**
      * Guardar o actualizar un usuario.
      * @param usuario Usuario a guardar.
