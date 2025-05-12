@@ -2,6 +2,11 @@ package Asistencias.dto;
 
 import java.util.Date;
 
+import Asistencias.model.Administrativo;
+import Asistencias.model.Estudiante;
+import Asistencias.model.Profesor;
+import Asistencias.model.Usuario;
+
 public class UsuarioDTO {
 
     private Long idUsuario;
@@ -16,14 +21,12 @@ public class UsuarioDTO {
     private Date fechaNacimiento; 
     private Boolean activo; 
     private String tipo;
-    private String passwordHash;
 
     // Constructor sin argumentos
     public UsuarioDTO() {}
 
     public UsuarioDTO(Long idUsuario, Long idUsuUni, Integer cedula, String nombre, String email, Integer facultadId,
-            String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, String tipo,
-            String passwordHash) {
+                      String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, String tipo) {
         this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -36,7 +39,21 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
         this.tipo = tipo;
-        this.passwordHash = passwordHash;
+    }
+
+    public UsuarioDTO(Usuario usuario) {
+        this.idUsuario = usuario.getUsuarioId();
+        this.idUsuUni = usuario.getIdUsuUni();
+        this.cedula = usuario.getCedula();
+        this.nombre = usuario.getNombre();
+        this.email = usuario.getEmail();
+        this.facultadId = usuario.getFacultadId();
+        this.carrera = usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null;
+        this.especialidad = usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null;
+        this.area = usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null;
+        this.fechaNacimiento = usuario.getFechaNacimiento();
+        this.activo = usuario.getActivo();
+        this.tipo = usuario.getTipo();
     }
 
     public Long getIdUsuario() {
@@ -135,14 +152,7 @@ public class UsuarioDTO {
         this.tipo = tipo;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
+   
     
 
 

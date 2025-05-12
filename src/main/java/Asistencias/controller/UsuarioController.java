@@ -6,6 +6,7 @@ import Asistencias.model.Administrativo;
 import Asistencias.model.Estudiante;
 import Asistencias.model.Profesor;
 import Asistencias.model.Usuario;
+import Asistencias.model.UsuarioRequest;
 import Asistencias.repository.CursoRepository;
 import Asistencias.repository.UsuarioRepository;
 import Asistencias.service.UsuarioService;
@@ -46,11 +47,9 @@ public class UsuarioController {
                         usuario instanceof Estudiante ? ((Estudiante) usuario).getCarrera() : null,
                         usuario instanceof Profesor ? ((Profesor) usuario).getEspecialidad() : null,
                         usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
-                        usuario.getFechaNacimiento() != null ? new java.sql.Date(usuario.getFechaNacimiento().getTime())
-                                : null,
+                        usuario.getFechaNacimiento(),
                         usuario.getActivo(),
-                        usuario.getTipo(),
-                        usuario.getPasswordHash()))
+                        usuario.getTipo()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
     }
@@ -71,8 +70,7 @@ public class UsuarioController {
                 usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
                 usuario.getFechaNacimiento(),
                 usuario.getActivo(),
-                usuario.getTipo(),
-                usuario.getPasswordHash()))).orElseGet(() -> ResponseEntity.notFound().build());
+                usuario.getTipo()))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/profesores")
@@ -91,8 +89,7 @@ public class UsuarioController {
                         null, // Los profesores no tienen área
                         profesor.getFechaNacimiento(),
                         profesor.getActivo(),
-                        profesor.getTipo(),
-                        profesor.getPasswordHash()))
+                        profesor.getTipo()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(profesoresDTO);
     }
@@ -113,21 +110,23 @@ public class UsuarioController {
                         null, // Los profesores no tienen área
                         alumno.getFechaNacimiento(),
                         alumno.getActivo(),
-                        alumno.getTipo(),
-                        alumno.getPasswordHash()))
+                        alumno.getTipo()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(alumnosDTO);
     }
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<?> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        if (usuarioDTO.getPasswordHash() == null || usuarioDTO.getPasswordHash().isEmpty()) {
-            return ResponseEntity.badRequest().body("passwordHash cannot be null");
-        }
+    public ResponseEntity<?> createUsuario(@RequestBody UsuarioRequest usuarioRequest) {
         try {
-            Usuario usuario = UsuarioFactory.crearUsuario(usuarioDTO);
+            UsuarioDTO usuarioDTO = usuarioRequest.getUsuarioDTO();
+            String password = usuarioRequest.getPassword();
+
+            // Crear el usuario con el hash de la contraseña
+            Usuario usuario = UsuarioFactory.crearUsuario(usuarioDTO, password);
             Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
+
+            // Crear el DTO para la respuesta
             UsuarioDTO nuevoUsuarioDTO = new UsuarioDTO(
                     nuevoUsuario.getUsuarioId(),
                     nuevoUsuario.getIdUsuUni(),
@@ -140,8 +139,7 @@ public class UsuarioController {
                     nuevoUsuario instanceof Administrativo ? ((Administrativo) nuevoUsuario).getArea() : null,
                     nuevoUsuario.getFechaNacimiento(),
                     nuevoUsuario.getActivo(),
-                    nuevoUsuario.getTipo(),
-                    nuevoUsuario.getPasswordHash());
+                    nuevoUsuario.getTipo());
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuarioDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -166,8 +164,7 @@ public class UsuarioController {
                             : null,
                     usuarioActualizado.getFechaNacimiento(),
                     usuarioActualizado.getActivo(),
-                    usuarioActualizado.getTipo(),
-                    usuarioActualizado.getPasswordHash());
+                    usuarioActualizado.getTipo());
             return ResponseEntity.ok(usuarioActualizadoDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

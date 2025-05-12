@@ -22,6 +22,7 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\As
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Administrador.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\Carrera_MateriaRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\InscripcionesController.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\UsuarioRequest.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\exception\UsuarioDuplicadoException.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Profesor.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\dto\UsuarioDTO.java

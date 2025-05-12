@@ -35,14 +35,36 @@ public class AuthController {
             if (passwordEncoder.matches(loginRequest.getPassword(), usuario.getPasswordHash())) {
                 // Generar el token JWT
                 String token = jwtTokenProvider.createToken(usuario.getEmail(), usuario.getTipo());
-                return ResponseEntity.ok(new AuthResponse(token));
+
+                // Crear la respuesta con el token y los datos del usuario
+                AuthResponse response = new AuthResponse(token, new UsuarioDTO(usuario));
+                return ResponseEntity.ok(response);
             }
         }
         // Si no se encuentra el usuario o la contraseña no coincide
         return ResponseEntity.status(401).body("Credenciales inválidas");
     }
 
-    // Clases internas solo para ejemplo
+    // Clase de respuesta para incluir el token y los datos del usuario
+    public static class AuthResponse {
+        private String token;
+        private UsuarioDTO user;
+
+        public AuthResponse(String token, UsuarioDTO user) {
+            this.token = token;
+            this.user = user;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public UsuarioDTO getUser() {
+            return user;
+        }
+    }
+
+    // Clase para manejar la solicitud de inicio de sesión
     public static class LoginRequest {
         private String email;
         private String password;
@@ -62,18 +84,6 @@ public class AuthController {
 
         public void setPassword(String password) {
             this.password = password;
-        }
-    }
-
-    public static class AuthResponse {
-        private String token;
-
-        public AuthResponse(String token) {
-            this.token = token;
-        }
-
-        public String getToken() {
-            return token;
         }
     }
 }
