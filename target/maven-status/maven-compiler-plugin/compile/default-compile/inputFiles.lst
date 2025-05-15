@@ -1,5 +1,6 @@
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\AsistenciasApplication.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\InscripcionesRepository.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\service\AsistenciaService.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Administrativo.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Estudiante.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\security\JwtAuthenticationFilter.java
@@ -18,10 +19,12 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\As
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\security\JwtTokenProvider.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Carrera_MateriaId.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\CursoPresencial.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\config\WebSocketConfig.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\CarreraRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Administrador.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\Carrera_MateriaRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\InscripcionesController.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\AsistenciaRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\UsuarioRequest.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\exception\UsuarioDuplicadoException.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Profesor.java
@@ -31,8 +34,10 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\As
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\config\SecurityConfig.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\CursoVirtual.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\service\SesionesService.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Asistencia.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\model\Curso.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\UsuarioRepository.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\RfidController.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\repository\CursoRepository.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\service\InscripcionesService.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\factory\UsuarioFactory.java
@@ -44,6 +49,7 @@ C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\As
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\service\CursoService.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\SesionesController.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\security\JwtAuthenticationEntryPoint.java
+C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\AsistenciaController.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\CursoController.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\MateriaController.java
 C:\Users\kevin\OneDrive\Documentos\GitHub\SpringBot_Asistencias\src\main\java\Asistencias\controller\CarreraController.java

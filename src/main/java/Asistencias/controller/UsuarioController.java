@@ -7,15 +7,12 @@ import Asistencias.model.Estudiante;
 import Asistencias.model.Profesor;
 import Asistencias.model.Usuario;
 import Asistencias.model.UsuarioRequest;
-import Asistencias.repository.CursoRepository;
-import Asistencias.repository.UsuarioRepository;
 import Asistencias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,7 +46,8 @@ public class UsuarioController {
                         usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
                         usuario.getFechaNacimiento(),
                         usuario.getActivo(),
-                        usuario.getTipo()))
+                        usuario.getTipo(),
+                        usuario.getUid()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
     }
@@ -70,7 +68,8 @@ public class UsuarioController {
                 usuario instanceof Administrativo ? ((Administrativo) usuario).getArea() : null,
                 usuario.getFechaNacimiento(),
                 usuario.getActivo(),
-                usuario.getTipo()))).orElseGet(() -> ResponseEntity.notFound().build());
+                usuario.getTipo(),
+                usuario.getUid()))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/profesores")
@@ -89,7 +88,8 @@ public class UsuarioController {
                         null, // Los profesores no tienen área
                         profesor.getFechaNacimiento(),
                         profesor.getActivo(),
-                        profesor.getTipo()))
+                        profesor.getTipo(),
+                        profesor.getUid()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(profesoresDTO);
     }
@@ -110,7 +110,8 @@ public class UsuarioController {
                         null, // Los profesores no tienen área
                         alumno.getFechaNacimiento(),
                         alumno.getActivo(),
-                        alumno.getTipo()))
+                        alumno.getTipo(),
+                        alumno.getUid()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(alumnosDTO);
     }
@@ -139,7 +140,9 @@ public class UsuarioController {
                     nuevoUsuario instanceof Administrativo ? ((Administrativo) nuevoUsuario).getArea() : null,
                     nuevoUsuario.getFechaNacimiento(),
                     nuevoUsuario.getActivo(),
-                    nuevoUsuario.getTipo());
+                    nuevoUsuario.getTipo(),
+                    nuevoUsuario.getUid());
+
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuarioDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -164,7 +167,9 @@ public class UsuarioController {
                             : null,
                     usuarioActualizado.getFechaNacimiento(),
                     usuarioActualizado.getActivo(),
-                    usuarioActualizado.getTipo());
+                    usuarioActualizado.getTipo(),
+                    usuarioActualizado.getUid());
+
             return ResponseEntity.ok(usuarioActualizadoDTO);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

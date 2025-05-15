@@ -21,12 +21,13 @@ public class UsuarioDTO {
     private Date fechaNacimiento; 
     private Boolean activo; 
     private String tipo;
+    private String uid;
 
     // Constructor sin argumentos
     public UsuarioDTO() {}
 
     public UsuarioDTO(Long idUsuario, Long idUsuUni, Integer cedula, String nombre, String email, Integer facultadId,
-                      String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, String tipo) {
+                      String carrera, String especialidad, String area, Date fechaNacimiento, Boolean activo, String tipo, String uid) {
         this.idUsuario = idUsuario;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -39,6 +40,7 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
         this.tipo = tipo;
+        this.uid = uid;
     }
 
     public UsuarioDTO(Usuario usuario) {
@@ -54,6 +56,7 @@ public class UsuarioDTO {
         this.fechaNacimiento = usuario.getFechaNacimiento();
         this.activo = usuario.getActivo();
         this.tipo = usuario.getTipo();
+        this.uid = usuario.getUid();
     }
 
     public Long getIdUsuario() {
@@ -152,7 +155,13 @@ public class UsuarioDTO {
         this.tipo = tipo;
     }
 
-   
+    public String getUid() {
+        return uid;
+    }
+    
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
     
 
 

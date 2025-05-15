@@ -46,6 +46,9 @@ public abstract class Usuario {
 
     @Column()
     private Integer facultadId; 
+   
+    @Column(nullable = false, unique = true)
+    private String uid;
 
     @Column(name = "tipo", insertable = false, updatable = false)
     private String tipo; // Gestionado por JPA, pero accesible desde el código
@@ -55,7 +58,7 @@ public abstract class Usuario {
     }
 
     // Constructor con parámetros
-    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
+    public Usuario(Long usuarioId, Long idUsuUni, Integer cedula, String nombre, String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId, String uid) {
         this.usuarioId = usuarioId;
         this.idUsuUni = idUsuUni;
         this.cedula = cedula;
@@ -67,6 +70,7 @@ public abstract class Usuario {
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
         this.facultadId = facultadId;
+        this.uid = uid;
     }
 
     // Getters y Setters
@@ -165,6 +169,14 @@ public abstract class Usuario {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     

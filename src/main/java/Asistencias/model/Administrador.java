@@ -14,8 +14,8 @@ public class Administrador extends Usuario {
     public Administrador() {}
 
     // Constructor con parámetros
-    public Administrador(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
-        super(usuarioId, idUsuUni, cedula, nombre, email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId);
+    public Administrador(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId, String uid) {
+        super(usuarioId, idUsuUni, cedula, nombre, email, passwordHash, fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId, uid);
     }
 
     

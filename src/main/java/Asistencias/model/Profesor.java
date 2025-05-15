@@ -19,8 +19,8 @@ public class Profesor extends Usuario {
     }
 
     // Constructor con parámetros
-    public Profesor(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String especialidad, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId) {
-        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash,  fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId);
+    public Profesor(Long usuarioId, Long idUsuUni, Integer cedula, String nombre,  String email, String passwordHash, String especialidad, Date fechaNacimiento, Boolean activo, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion, Integer facultadId, String uid) {
+        super(usuarioId, idUsuUni, cedula, nombre,  email, passwordHash,  fechaNacimiento, activo, fechaCreacion, fechaActualizacion, facultadId, uid);
         this.especialidad = especialidad;
     }
 

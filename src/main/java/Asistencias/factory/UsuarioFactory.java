@@ -45,7 +45,11 @@ public class UsuarioFactory {
                         usuarioDTO.getActivo(), // Asignar estado activo
                         null, // Fecha de creación (se genera automáticamente)
                         null, // Fecha de actualización (se genera automáticamente)
-                        usuarioDTO.getFacultadId() // Asignar facultadId
+                        usuarioDTO.getFacultadId(), // Asignar facultadId
+                        usuarioDTO.getUid() 
+
+
+
                 );
             case "Profesor": // Caso para Profesor
                 return new Profesor(
@@ -60,7 +64,8 @@ public class UsuarioFactory {
                         usuarioDTO.getActivo(), // Asignar estado activo
                         null, // Fecha de creación
                         null, // Fecha de actualización
-                        usuarioDTO.getFacultadId() // Asignar facultadId
+                        usuarioDTO.getFacultadId(), // Asignar facultadId
+                        usuarioDTO.getUid() 
                 );
             case "Administrativo": // Caso para Administrativo
                 return new Administrativo(
@@ -75,7 +80,8 @@ public class UsuarioFactory {
                         usuarioDTO.getActivo(), // Asignar estado activo
                         null, // Fecha de creación
                         null, // Fecha de actualización
-                        usuarioDTO.getFacultadId() // Asignar facultadId
+                        usuarioDTO.getFacultadId(), // Asignar facultadId
+                        usuarioDTO.getUid() 
                 );
             case "Admin": // Caso para Administrador
                 return new Administrador(
@@ -89,7 +95,8 @@ public class UsuarioFactory {
                         usuarioDTO.getActivo(), // Asignar estado activo
                         null, // Fecha de creación
                         null, // Fecha de actualización
-                        usuarioDTO.getFacultadId() // Asignar facultadId
+                        usuarioDTO.getFacultadId(), // Asignar facultadId
+                        usuarioDTO.getUid() 
                 );
             default:
                 throw new IllegalArgumentException("Tipo de usuario no válido: " + usuarioDTO.getTipo());

@@ -21,27 +21,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
-                                    throws ServletException, IOException {
-        try {
-            String jwt = getJwtFromRequest(request);
-
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                String username = tokenProvider.getUsernameFromJWT(jwt);
-
-                // Aquí, en una implementación real, deberías cargar los detalles del usuario (por ejemplo, de la base de datos)
-                // y construir una autenticación completa. En este ejemplo, creamos un objeto de autenticación simple:
-                Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, null);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        } catch (Exception ex) {
-            logger.error("No se pudo establecer la autenticación en el contexto de seguridad", ex);
-        }
-
+protected void doFilterInternal(HttpServletRequest request,
+                                HttpServletResponse response,
+                                FilterChain filterChain)
+                                throws ServletException, IOException {
+    String path = request.getServletPath();
+    if (path.startsWith("/rfid-ws")) {
         filterChain.doFilter(request, response);
+        return;
     }
+
+    try {
+        String jwt = getJwtFromRequest(request);
+
+        if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+            String username = tokenProvider.getUsernameFromJWT(jwt);
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, null);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+    } catch (Exception ex) {
+        logger.error("No se pudo establecer la autenticación en el contexto de seguridad", ex);
+    }
+
+    filterChain.doFilter(request, response);
+}
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
