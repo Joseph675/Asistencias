@@ -24,6 +24,9 @@ public class AsistenciaService {
         this.usuarioRepo = usuarioRepo;
     }
 
+    public List<Asistencia> obtenerTodasLasAsistencias() {
+    return asistenciaRepository.findAll();
+}
     public List<Asistencia> obtenerAsistenciasPorSesion(Integer sesionId) {
         return asistenciaRepository.findBySesionId(sesionId);
     }

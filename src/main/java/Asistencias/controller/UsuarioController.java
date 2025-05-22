@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.dao.DataIntegrityViolationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -144,6 +144,30 @@ public class UsuarioController {
                     nuevoUsuario.getUid());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuarioDTO);
+        } catch (DataIntegrityViolationException ex) {
+            // Revisa si el mensaje contiene 'unique_uid'
+            if (ex.getRootCause() != null && ex.getRootCause().getMessage().contains("unique_uid")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("El UID ya está registrado en el sistema.");
+            }
+
+            if (ex.getRootCause() != null && ex.getRootCause().getMessage().contains("unique_idUsuUni")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("El ID Universitario ya está registrado en el sistema.");
+            }
+
+            if (ex.getRootCause() != null && ex.getRootCause().getMessage().contains("unique_cedula")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("La Cedula ya está registrado en el sistema.");
+            }
+
+            if (ex.getRootCause() != null && ex.getRootCause().getMessage().contains("unique_email")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("El Email ya está registrado en el sistema.");
+            }
+            // Puedes hacer lo mismo para email, cedula, etc, si lo deseas.
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error de integridad: " + ex.getRootCause().getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
