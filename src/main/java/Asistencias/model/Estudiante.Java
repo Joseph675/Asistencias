@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import java.util.Date;
 import java.time.LocalDateTime;
 
-
 @Entity
 @DiscriminatorValue("Alumno") // Valor del tipo en la columna "tipo"
 public class Estudiante extends Usuario {
